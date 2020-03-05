@@ -15,10 +15,10 @@ module.exports = {
     rules: [
       {
         test: /\.scss$/,
-        use:  [  'style-loader', MiniCssExtractPlugin.loader, 'css-loader','postcss-loader','sass-loader']
+        use:  [  'style-loader', MiniCssExtractPlugin.loader, 'css-loader','postcss-loader','resolve-url-loader','sass-loader']
       },
       {
-         test: /\.(png|svg|jpg|gif)$/,
+         test: /\.(png|svg|jpg|gif|eot|woff|woff2|ttf)$/,
          use: [
            'file-loader',
          ],
@@ -31,12 +31,13 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       inject: false,
-      hash: true,
+      hash: false,
       template: './src/index.html',
       filename: 'index.html'
     }),
     new CopyPlugin([
-      { from: './src/img', to: './img' }
+      { from: './src/img', to: './img' },
+      { from: './src/webfonts', to: './webfonts' }
     ]),
     new LiveReloadPlugin()
   ]
